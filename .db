@@ -1,0 +1,49 @@
+-- TABLE
+CREATE TABLE Agendamento(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  dt_consulta DATE NOT NULL,
+  dt_agendamento DATE NOT NULL,
+  valor_consulta INTEGER NOT NULL,
+  id_medico INTEGER NOT NULL,
+  id_paciente INTEGER NOT NULL,
+  FOREIGN  KEY (id_medico) REFERENCES Medico(id),
+  FOREIGN  KEY (id_paciente) REFERENCES Paciente(id)
+);
+CREATE TABLE demo (ID integer primary key, Name varchar(20), Hint text );
+CREATE TABLE Especialidade( 
+ id INTEGER PRIMARY KEY AUTOINCREMENT,
+ descricao VARCHAR(100) NOT NULL
+);
+CREATE TABLE Medico(
+  id INTEGER PRIMARY KEY, 
+  crm INTEGER,
+  FOREIGN KEY (id) REFERENCES Pessoa(cpf)
+);
+CREATE TABLE MedicoEspecialidade (
+  id_medico INTEGER NOT NULL,
+  id_especialidade INTEGER NOT NULL,
+  PRIMARY KEY (id_medico, id_especialidade),
+  FOREIGN KEY (id_medico) REFERENCES Medico(id),
+  FOREIGN KEY (id_especialidade) REFERENCES Especialidade(id)
+);
+CREATE TABLE Paciente(
+  id INTEGER PRIMARY KEY,  
+  senha VARCHAR(10) NOT NULL CHECK(LENGTH(senha) >= 5 AND LENGTH(senha) <= 10),
+  plano_saude INTEGER NOT NULL DEFAULT 1,
+  FOREIGN  KEY (id) REFERENCES Pessoa(cpf)
+  );
+CREATE TABLE Pessoa(
+  cpf INTEGER PRIMARY KEY AUTOINCREMENT,
+  email VARCHAR(50) not NULL,
+  nome VARCHAR(150) NOT NULL,
+  dt_nasc DATE,
+  endereco VARCHAR(300) NOT NULL,
+  telefone VARCHAR(15)
+);
+ 
+-- INDEX
+ 
+-- TRIGGER
+ 
+-- VIEW
+ 
